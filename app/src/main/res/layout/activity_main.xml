@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D7F5F0"
+    tools:context=".Main">
+
+    <TextView
+        android:id="@+id/Header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:fontFamily="sans-serif-condensed"
+        android:rotationX="16"
+        android:text="Your AI Assistant"
+        android:textColor="#1F5552"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="66dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="347dp"
+        android:layout_height="133dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="129dp"
+        android:text="Welcome to Sage – Your Personal Knowledge Companion! We're here to assist you with information, advice, and conversations on a wide range of topics. Let's embark on a journey of learning and discovery together."
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="152dp" />
+
+    <Button
+        android:id="@+id/Continue"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="29dp"
+        android:backgroundTint="#A4D1A3"
+        android:onClick="onContinueClick"
+        android:text="Continue"
+        android:textColor="#040000"
+        android:textSize="44sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="397dp"
+        android:layout_height="314dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="147dp"
+        app:srcCompat="@drawable/imageai" />
+
+
+</RelativeLayout>
