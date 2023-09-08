@@ -117,7 +117,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(SignUpActivity.this,"Account has been created", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE)
                             FirebaseUser SageUser = authentication.getCurrentUser();
 
                             //Send Firebase Verfication Email
