@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D7F5F0"
-    tools:context=".Main">
+    android:background="#D4F0F8"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/Header"
@@ -17,7 +17,7 @@
         android:fontFamily="sans-serif-condensed"
         android:rotationX="16"
         android:text="Your AI Assistant"
-        android:textColor="#1F5552"
+        android:textColor="#010317"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

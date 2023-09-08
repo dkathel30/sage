@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "112353852671",
+    "project_id": "sage-20f00",
+    "storage_bucket": "sage-20f00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112353852671:android:26cb0179e5decb23faa0ca",
+        "android_client_info": {
+          "package_name": "com.example.sage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112353852671-jui7logt73b31cd2vemid9bo7hpndli3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2MIX8SSBkkPQroxqEf_2xXu7d0PjpGpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112353852671-jui7logt73b31cd2vemid9bo7hpndli3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
