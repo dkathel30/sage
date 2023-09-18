@@ -2,6 +2,8 @@ package com.example.sage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,6 +22,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -41,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         FullName = findViewById(R.id.FullName);
         EmailAddress = findViewById(R.id.EmailAddress);
-        DateOfBirth = findViewById(R.id.EmailAddress);
+        DateOfBirth = findViewById(R.id.DateOfBirth);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
 
@@ -61,6 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = editTextPassword.getText().toString();
                 String confirmpassword = editTextConfirmPassword.getText().toString();
                 String gender;
+
 
                 if(TextUtils.isEmpty(fullname)){
                     Toast.makeText(SignUpActivity.this,"Enter your Fullname please", Toast.LENGTH_LONG).show();
@@ -103,35 +109,64 @@ public class SignUpActivity extends AppCompatActivity {
                 }else {
                     gender = RadioButtonSelected.getText().toString();
                     progressBar.setVisibility(View.VISIBLE);
-                    SignUpUser(fullname,emailaddress,DOB,gender,password);
+                    SignedUpUser(fullname,emailaddress,DOB,gender,password);
 
                 }
             }
         });
     }
-    private void SignUpUser(String fullname, String emailaddress, String DOB, String gender,String password){
+    private void SignedUpUser(String fullname, String emailaddress, String DOB,String gender, String password){
         FirebaseAuth authentication = FirebaseAuth.getInstance();
         authentication.createUserWithEmailAndPassword(emailaddress,password).addOnCompleteListener(SignUpActivity.this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(SignUpActivity.this,"Account has been created", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE)
+
                             FirebaseUser SageUser = authentication.getCurrentUser();
 
-                            //Send Firebase Verfication Email
-                            SageUser.sendEmailVerification();
+                            //Update Display Name of User
+                            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(fullname).build();
+                            SageUser.updateProfile(profileChangeRequest);
 
-                            /*//Open User Account with Sage
-                            Intent intent = new Intent(SignUpActivity.this, UserAccount.class);
+                            //Entering user data into the Firebase dataset.
+                            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(emailaddress, DOB, gender,
+                                    password);
 
-                            //Preventing User from returning to SignUp Activity on pressing GoBackButton
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            //Extracting User reference from database for "Sign Up"
+                            DatabaseReference UserReference = FirebaseDatabase.getInstance().getReference("SignUp Users");
+
+                            UserReference.child(SageUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        //Send Firebase Verfication Email
+                                        SageUser.sendEmailVerification();
+
+                                        Toast.makeText(SignUpActivity.this,"Account has been created. Kindly verify your email!"
+                                                , Toast.LENGTH_LONG).show();
+                                        progressBar.setVisibility(View.GONE);
+
+                                        //Open User Account with Sage
+                                        Intent intent = new Intent(SignUpActivity.this, UserPage.class);
+
+                                        //Preventing User from returning to SignUp Activity on pressing GoBackButton
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                                             | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            //Ending the activity
-                            finish();*/
+                                        startActivity(intent);
+                                        //Ending the activity
+                                        finish();// Closing sign up activity
+                                    }else {
+                                        Toast.makeText(SignUpActivity.this,"Signing Up has failed"
+                                                , Toast.LENGTH_LONG).show();
+                                        progressBar.setVisibility(View.GONE);
+                                    }progressBar.setVisibility(View.GONE);
+
+                                }
+                            });
+
+
 
                         }else {
                             try {
@@ -147,7 +182,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 Toast.makeText(SignUpActivity.this,e.getMessage(), Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.GONE);
                             }
-                        }
+                        }progressBar.setVisibility(View.GONE);
                     }
                 });
     }
