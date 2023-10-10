@@ -87,11 +87,11 @@ public class Authentication extends AppCompatActivity {
                     editTextpassword.requestFocus();
                 } else {
                     progressBar.setVisibility(View.VISIBLE);
-                    LogInUser(TextEmail, TextPwd);
+                    LogIn(TextEmail, TextPwd);
                 }
             }
 
-            private void LogInUser(String email, String pwd) {
+            private void LogIn(String email, String pwd) {
                 authProfile.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(Authentication.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
