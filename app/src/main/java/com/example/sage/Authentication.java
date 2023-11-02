@@ -104,6 +104,9 @@ public class Authentication extends AppCompatActivity {
                             if (SageUser.isEmailVerified()) {
                                 Toast.makeText(Authentication.this, "Logged In successfully!", Toast.LENGTH_LONG).show();
                                 //Open User Account Profile
+                                Intent intentToUserPage = new Intent(Authentication.this, UserPage.class);
+                                startActivity(intentToUserPage);
+                                finish();
 
                             } else {
                                 SageUser.sendEmailVerification();

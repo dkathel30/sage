@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_calendar_event"
+        android:title="Create Calendar Event" />
+    <item
+        android:id="@+id/action_set_reminders"
+        android:title="Set Reminders" />
+    <item
+        android:id="@+id/action_weather_updates"
+        android:title="Real-Time Weather Updates" />
+</menu>

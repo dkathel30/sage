@@ -2,22 +2,34 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    namespace 'com.example.sage'
-    compileSdk 33
+    compileSdkVersion 33
+
+    namespace 'com.example.sage' // Existing namespace
 
     defaultConfig {
         applicationId "com.example.sage"
-        minSdk 26
-        targetSdk 33
+        minSdkVersion 26
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // Add signingConfigs block here:
+    signingConfigs {
+        release {
+            storeFile file('/Users/tabib/AppKeys/my-release-key.jks')
+            storePassword 'Sgnote@10'
+            keyAlias 'my-key-alias'
+            keyPassword 'Sgnote@10'
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release // Reference the signing configuration here
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -37,7 +49,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
-    // Add the OkHttp dependency here:
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1' // You can use the latest version
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 }

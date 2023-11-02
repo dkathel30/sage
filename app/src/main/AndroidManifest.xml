@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SET_ALARM"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,10 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sage"
         tools:targetApi="31">
+
+        <!-- Activities -->
         <activity
             android:name=".UserPage"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"> <!-- Add this line to adjust the layout -->
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
             android:name=".SignUpActivity"
@@ -28,10 +34,13 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Receiver -->
+        <receiver android:name=".NotificationReceiver"/>
+
     </application>
 
 </manifest>

@@ -31,8 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/chatGPT_icon"
+                android:background="@android:color/white"
                 android:padding="5dp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/black" />
 
         </RelativeLayout>
 
@@ -59,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/black" />
 
             <ImageView
                 android:id="@+id/person"
